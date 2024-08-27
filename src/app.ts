@@ -1,6 +1,6 @@
 // src/app.ts
 import express, {Response as ExResponse, Request as ExRequest, NextFunction, json, urlencoded} from "express";
-import { RegisterRoutes } from "../build/routes";
+import { RegisterRoutes } from "./routes/routes";
 import swaggerUi from "swagger-ui-express";
 import { ValidateError } from "tsoa";
 
@@ -16,7 +16,7 @@ app.use(json());
 
 app.use("/docs", swaggerUi.serve, async (_req: ExRequest, res: ExResponse) => {
     return res.send(
-      swaggerUi.generateHTML(await import("../build/swagger.json"))
+      swaggerUi.generateHTML(await import("./swagger.json"))
     );
 });
 

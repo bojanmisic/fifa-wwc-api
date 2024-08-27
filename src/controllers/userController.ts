@@ -1,24 +1,14 @@
 // src/users/usersController.ts
 import {
-    Body,
     Controller,
     Get,
     Path,
-    Post,
     Query,
     Route,
-    Example,
-    Response,
-    SuccessResponse,
+    Example
   } from "tsoa";
   import { User } from "../model/users/user";
-  import { UserService, UserCreationParams } from "../services/userService";
-  import { Inject } from "typescript-ioc";
-
-  interface ValidateErrorJSON {
-    message: "Validation failed";
-    details: { [name: string]: unknown };
-  }  
+  import { UserService } from "../services/userService";
 
   @Route("users")
   export class UsersController extends Controller {
@@ -45,23 +35,5 @@ import {
     ): Promise<User> {
       return new UserService().get(userId, name);
     }
-  
-    @SuccessResponse("201", "Created") // Custom success response
-    @Response<ValidateErrorJSON>(422, "Validation Failed", {
-        message: "Validation failed",
-        details: {
-          requestBody: {
-            message: "id is an excess property and therefore not allowed",
-            value: "52907745-7672-470e-a803-a2f8feb52944",
-          },
-        },
-      })
-    @Post()
-    public async createUser(
-      @Body() requestBody: UserCreationParams
-    ): Promise<void> {
-      this.setStatus(201); // set return status 201
-      new UserService().create(requestBody);
-      return;
-    }
+
   }

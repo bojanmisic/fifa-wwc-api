@@ -1,4 +1,3 @@
-import { UUID } from "../contract/uuid";
 
 /**
  * User objects allow you to associate actions performed
@@ -7,13 +6,5 @@ import { UUID } from "../contract/uuid";
  * every user in the system regardless of status and role.
  */
 export interface User {
-    id: UUID;
 
-    /**
-     * The email the user used to register his account
-     */
-    email: string;
-    name: string;
-    status?: "Happy" | "Sad";
-    phoneNumbers: string[];
 }
