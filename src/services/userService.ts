@@ -1,11 +1,12 @@
 // src/services/userService.ts
+import { UUID } from "src/model/contract/uuid";
 import { User } from "../model/users/user";
 
 // A post request should not contain an id.
 export type UserCreationParams = Pick<User, "email" | "name" | "phoneNumbers">;
 
 export class UserService {
-  public get(id: number, name?: string): User {
+  public get(id: UUID, name?: string): User {
     return {
       id,
       email: "jane@doe.com",
