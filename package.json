@@ -1,8 +1,12 @@
 {
   "name": "fifa-wwc",
   "version": "1.0.0",
-  "main": "index.js",
-  "author": "Bojan Misic <bojan.misic@awesome7.com>",
+  "main": "build/src/server.js",
+  "scripts": {
+    "build": "tsoa spec-and-routes && tsc",
+    "start": "node build/src/server.js"
+  },  
+  "author": "Bojan Misic <misic.bojan@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "express": "^4.19.2",
