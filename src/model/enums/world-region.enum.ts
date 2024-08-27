@@ -36,4 +36,4 @@ export enum WorldRegion {
      * Polar region, often considered for areas around the poles.
      */
     Polar = "Polar",
-  }
+}

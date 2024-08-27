@@ -31,4 +31,4 @@ export enum FifaFederation {
      * Union of European Football Associations.
      */
     UEFA = "UEFA",
-  }
+}
