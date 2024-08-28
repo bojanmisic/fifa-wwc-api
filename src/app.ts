@@ -9,7 +9,6 @@ import { WorldCupRepositoryBase } from "./contract/world-cup-repository";
 import { CandidateService } from "./services/candidate-service";
 import { MatchdataApi } from "./integrations/wwc2023/api";
 import { CountriesApi } from "./integrations/restcountries/api";
-import { CandidateController } from "./controllers/candidates-controller";
 
 export const app = express();
 
