@@ -1,24 +1,22 @@
-import { WorldCupRepositoryBase } from "src/contract/world-cup-repository";
-import { MatchdataApi as WwcApi } from "src/integrations/wwc2023/api";
-import { CountriesApi as CountriesApi } from "src/integrations/restcountries/api";
-import { CandidateFilter, Candidate } from "src/model/candidate";
-import { CountryDetails, CountryDetailsFilter } from "src/model/country-details";
-import { CountryHeader, CountryHeaderFilter } from "src/model/country-header";
-import { TeamDetails, TeamDetailsFilter } from "src/model/team-details";
-import { TeamHeader, TeamHeaderFilter } from "src/model/team-header";
-import { Inject } from "typescript-ioc";
-import { CountryCode } from "src/model/types";
+import { WorldCupRepositoryBase } from "../contract/world-cup-repository-base";
+import { MatchdataApi as WwcApi } from "../integrations/wwc2023/api";
+import { CountriesApi as CountriesApi } from "../integrations/restcountries/api";
+import { CandidateFilter, Candidate } from "../model/candidate";
+import { CountryDetails, CountryDetailsFilter } from "../model/country-details";
+import { CountryHeader, CountryHeaderFilter } from "../model/country-header";
+import { TeamDetails, TeamDetailsFilter } from "../model/team-details";
+import { TeamHeader, TeamHeaderFilter } from "../model/team-header";
+import { CountryCode } from "../model/types";
+import { Sort } from "../contract/sort.type";
 
-export class RealWorldCupRepository extends WorldCupRepositoryBase {
+export class RealWorldCupRepository implements WorldCupRepositoryBase {
 
-    private wwcApiService: WwcApi;
-    private countriesApiService: CountriesApi;
+    private wwcApiService!: WwcApi;
+    private countriesApiService!: CountriesApi;
 
-    constructor(@Inject wwcApiService: WwcApi, @Inject countriesApiService: CountriesApi) {
-        super();
-        
-        this.wwcApiService = wwcApiService;
-        this.countriesApiService = countriesApiService;
+    constructor() {
+        this.wwcApiService = new WwcApi();
+        this.countriesApiService = new CountriesApi();
     }
 
     public async getCandidates(filter?: CandidateFilter, sort?: Sort<Candidate>): Promise<Candidate[]> {

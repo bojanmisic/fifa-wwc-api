@@ -1,14 +1,14 @@
-import { WorldCupRepositoryBase } from "src/contract/world-cup-repository";
-import { Candidate, CandidateFilter } from "src/model/candidate";
+import { Sort } from "../contract/sort.type";
+import { WorldCupRepositoryBase } from "../contract/world-cup-repository-base";
+import { Candidate, CandidateFilter } from "../model/candidate";
 import { Route } from "tsoa";
-import { Inject } from "typescript-ioc";
 
 @Route("candidates")
 export class CandidateService {
 
-  private candidateRepository: WorldCupRepositoryBase;
+  private candidateRepository!: WorldCupRepositoryBase;
 
-  constructor(@Inject candidateRepository: WorldCupRepositoryBase) {
+  constructor(candidateRepository: WorldCupRepositoryBase) {
     this.candidateRepository = candidateRepository;
   }
 

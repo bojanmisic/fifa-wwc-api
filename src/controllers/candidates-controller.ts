@@ -1,22 +1,21 @@
 // src/users/usersController.ts
-import { Candidate } from "src/model/candidate";
-import { CandidateService } from "src/services/candidate-service";
+import { RealWorldCupRepository } from "../repositories/real-world-cup-repository";
+import { Candidate } from "../model/candidate";
+import { CandidateService } from "../services/candidate-service";
 import {
     Controller,
     Get,
     Route,
   } from "tsoa";
-import { Inject } from "typescript-ioc";
 
   @Route("candidates")
   export class CandidateController extends Controller {
 
     private candidateService: CandidateService;
 
-    constructor(@Inject candidateService: CandidateService) {
+    constructor() {
         super();
-
-        this.candidateService = candidateService;
+        this.candidateService = new CandidateService(new RealWorldCupRepository());
     }
 
     @Get()

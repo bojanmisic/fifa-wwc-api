@@ -8,11 +8,5 @@
     },
     "routes": {
       "routesDir": "src/routes"
-    },
-    "compilerOptions": {
-      "paths": {
-        "types": ["src/model/types/index.ts"],
-        "enums": ["src/model/enums/index.ts"]
-      }
-  }
+    }
 }

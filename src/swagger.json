@@ -6,7 +6,198 @@
 		"parameters": {},
 		"requestBodies": {},
 		"responses": {},
-		"schemas": {},
+		"schemas": {
+			"CountryCode": {
+				"allOf": [
+					{
+						"type": "string"
+					},
+					{
+						"properties": {
+							"__length3__": {
+								"type": "boolean",
+								"enum": [
+									true
+								],
+								"nullable": false
+							}
+						},
+						"required": [
+							"__length3__"
+						],
+						"type": "object"
+					}
+				],
+				"description": "A branded type for country codes.\n\nThis type ensures that strings representing country codes have exactly 3 characters."
+			},
+			"PositiveNumber": {
+				"allOf": [
+					{
+						"type": "number",
+						"format": "double"
+					},
+					{
+						"properties": {
+							"__positive__": {
+								"type": "boolean",
+								"enum": [
+									true
+								],
+								"nullable": false
+							}
+						},
+						"required": [
+							"__positive__"
+						],
+						"type": "object"
+					}
+				],
+				"description": "A branded type for positive numbers.\n\nThis type ensures that the number is strictly greater than zero, representing a positive value."
+			},
+			"FifaFederation": {
+				"description": "Enum representing the various FIFA federations.",
+				"enum": [
+					"AFC",
+					"CAF",
+					"CONCACAF",
+					"CONMEBOL",
+					"OFC",
+					"UEFA"
+				],
+				"type": "string"
+			},
+			"WorldRegion": {
+				"description": "Enum representing the different world regions.",
+				"enum": [
+					"Africa",
+					"Americas",
+					"Asia",
+					"Europe",
+					"Oceania",
+					"Antarctica",
+					"Polar"
+				],
+				"type": "string"
+			},
+			"WorldSubregion": {
+				"description": "Enum representing the various subregions as defined in the restcountries API.",
+				"enum": [
+					"Northern Africa",
+					"Sub-Saharan Africa",
+					"Latin America and the Caribbean",
+					"Caribbean",
+					"Central America",
+					"South America",
+					"Northern America",
+					"Central Asia",
+					"Eastern Asia",
+					"South-Eastern Asia",
+					"Southern Asia",
+					"Western Asia",
+					"Eastern Europe",
+					"Northern Europe",
+					"Southern Europe",
+					"Western Europe",
+					"Australia and New Zealand",
+					"Melanesia",
+					"Micronesia",
+					"Polynesia",
+					"Antarctica"
+				],
+				"type": "string"
+			},
+			"Url": {
+				"allOf": [
+					{
+						"type": "string"
+					},
+					{
+						"properties": {
+							"__brand": {
+								"type": "string",
+								"enum": [
+									"url"
+								],
+								"nullable": false
+							}
+						},
+						"required": [
+							"__brand"
+						],
+						"type": "object"
+					}
+				]
+			},
+			"Candidate": {
+				"description": "Represents a candidate country for hosting the FIFA World Cup.\nCombines key data from both the team and country perspectives.",
+				"properties": {
+					"countryCode": {
+						"$ref": "#/components/schemas/CountryCode",
+						"description": "The ISO 3166-1 alpha-3 country code."
+					},
+					"countryName": {
+						"type": "string",
+						"description": "The official name of the country."
+					},
+					"fifaRank": {
+						"$ref": "#/components/schemas/PositiveNumber",
+						"description": "The FIFA ranking of the team, where a lower number indicates a higher rank.\nThis value is optional and may not be present for all teams."
+					},
+					"federation": {
+						"$ref": "#/components/schemas/FifaFederation",
+						"description": "The football federation the team belongs to (e.g., UEFA, CONMEBOL)."
+					},
+					"area": {
+						"$ref": "#/components/schemas/PositiveNumber",
+						"description": "The total area of the country in square kilometers."
+					},
+					"population": {
+						"$ref": "#/components/schemas/PositiveNumber",
+						"description": "The population of the country."
+					},
+					"region": {
+						"$ref": "#/components/schemas/WorldRegion",
+						"description": "The region (continent) where the country is located (e.g., Europe, Americas)."
+					},
+					"subregion": {
+						"$ref": "#/components/schemas/WorldSubregion",
+						"description": "The subregion (e.g., Caribbean, Melanesia) the country is part of."
+					},
+					"capital": {
+						"type": "string",
+						"description": "The capital city of the country."
+					},
+					"teamName": {
+						"type": "string",
+						"description": "The name of the team, usually the name of the country it represents."
+					},
+					"teamIconSvgUrl": {
+						"$ref": "#/components/schemas/Url",
+						"description": "The URL to the team's icon or flag image in SVG format."
+					},
+					"countryFlagSvgUrl": {
+						"$ref": "#/components/schemas/Url",
+						"description": "The URL to the team's icon or flag image in SVG format."
+					}
+				},
+				"required": [
+					"countryCode",
+					"countryName",
+					"fifaRank",
+					"federation",
+					"area",
+					"population",
+					"region",
+					"subregion",
+					"capital",
+					"teamName",
+					"teamIconSvgUrl",
+					"countryFlagSvgUrl"
+				],
+				"type": "object",
+				"additionalProperties": false
+			}
+		},
 		"securitySchemes": {}
 	},
 	"info": {
@@ -20,7 +211,30 @@
 			"email": "misic.bojan@gmail.com"
 		}
 	},
-	"paths": {},
+	"paths": {
+		"/candidates": {
+			"get": {
+				"operationId": "GetAllCandidates",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/Candidate"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": []
+			}
+		}
+	},
 	"servers": [
 		{
 			"url": "/"

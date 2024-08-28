@@ -1,6 +1,6 @@
-type SortOrder = 'asc' | 'desc';
+export type SortOrder = 'asc' | 'desc';
 
-interface Sort<T> {
+export interface Sort<T> {
   property: keyof T;
   order: SortOrder;
 }

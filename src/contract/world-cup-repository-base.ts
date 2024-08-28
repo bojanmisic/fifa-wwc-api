@@ -1,9 +1,10 @@
-import { CandidateFilter, Candidate } from "src/model/candidate";
-import { CountryDetailsFilter, CountryDetails } from "src/model/country-details";
-import { CountryHeaderFilter, CountryHeader } from "src/model/country-header";
-import { TeamDetailsFilter, TeamDetails } from "src/model/team-details";
-import { TeamHeaderFilter, TeamHeader } from "src/model/team-header";
-import { CountryCode } from "src/model/types";
+import { CandidateFilter, Candidate } from "../model/candidate";
+import { CountryDetailsFilter, CountryDetails } from "../model/country-details";
+import { CountryHeaderFilter, CountryHeader } from "../model/country-header";
+import { TeamDetailsFilter, TeamDetails } from "../model/team-details";
+import { TeamHeaderFilter, TeamHeader } from "../model/team-header";
+import { CountryCode } from "../model/types";
+import { Sort } from "./sort.type";
 
 /**
  * Repository interface for managing candidates and related data such as team headers, country headers, and details.
