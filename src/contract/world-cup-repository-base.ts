@@ -2,7 +2,7 @@ import { CandidateFilter, Candidate } from "../model/candidate";
 import { CountryDetailsFilter, CountryDetails } from "../model/country-details";
 import { CountryHeaderFilter, CountryHeader } from "../model/country-header";
 import { TeamDetailsFilter, TeamDetails } from "../model/team-details";
-import { TeamHeaderFilter, TeamHeader } from "../model/team-header";
+import { TeamHeader } from "../model/team-header";
 import { CountryCode } from "../model/types";
 import { Sort } from "./sort.type";
 
@@ -25,12 +25,10 @@ export abstract class WorldCupRepositoryBase {
     /**
      * Retrieves a list of team headers, with optional filtering and sorting.
      * 
-     * @param filter - Optional filter criteria to narrow down the list of team headers.
      * @param sort - Optional sorting criteria to order the list of team headers.
      * @returns A promise that resolves to an array of `TeamHeader` objects.
      */
     public abstract getTeamHeaders(
-      filter?: TeamHeaderFilter,
       sort?: Sort<TeamHeader>
     ): Promise<TeamHeader[]>;
   

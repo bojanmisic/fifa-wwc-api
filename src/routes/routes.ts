@@ -23,11 +23,6 @@ const models: TsoaRoute.Models = {
         "type": {"dataType":"intersection","subSchemas":[{"dataType":"double"},{"dataType":"nestedObjectLiteral","nestedProperties":{"__positive__":{"dataType":"enum","enums":[true],"required":true}}}],"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "FifaFederation": {
-        "dataType": "refEnum",
-        "enums": ["AFC","CAF","CONCACAF","CONMEBOL","OFC","UEFA"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "WorldRegion": {
         "dataType": "refEnum",
         "enums": ["Africa","Americas","Asia","Europe","Oceania","Antarctica","Polar"],
@@ -46,10 +41,8 @@ const models: TsoaRoute.Models = {
     "Candidate": {
         "dataType": "refObject",
         "properties": {
-            "countryCode": {"ref":"CountryCode","required":true},
+            "countryCode": {"ref":"CountryCode","required":true,"validators":{"isString":{"errorMsg":"Must be string with 3 characters"},"minLength":{"errorMsg":"Must be string with 3 characters","value":3},"maxLength":{"errorMsg":"Must be string with 3 characters","value":3}}},
             "countryName": {"dataType":"string","required":true},
-            "fifaRank": {"ref":"PositiveNumber","required":true},
-            "federation": {"ref":"FifaFederation","required":true},
             "area": {"ref":"PositiveNumber","required":true},
             "population": {"ref":"PositiveNumber","required":true},
             "region": {"ref":"WorldRegion","required":true},
@@ -85,6 +78,14 @@ export function RegisterRoutes(app: Router) {
 
             async function CandidateController_getAllCandidates(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
+                    minArea: {"in":"query","name":"minArea","dataType":"double"},
+                    maxArea: {"in":"query","name":"maxArea","dataType":"double"},
+                    minPopulation: {"in":"query","name":"minPopulation","dataType":"double"},
+                    maxPopulation: {"in":"query","name":"maxPopulation","dataType":"double"},
+                    region: {"in":"query","name":"region","ref":"WorldRegion"},
+                    subregion: {"in":"query","name":"subregion","ref":"WorldSubregion"},
+                    sortBy: {"in":"query","name":"sortBy","dataType":"enum","enums":["countryCode","countryName","area","population","region","subregion","capital","teamName","teamIconSvgUrl","countryFlagSvgUrl"]},
+                    sortOrder: {"in":"query","name":"sortOrder","dataType":"union","subSchemas":[{"dataType":"enum","enums":["asc"]},{"dataType":"enum","enums":["desc"]}]},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa

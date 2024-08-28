@@ -6,7 +6,7 @@ import { Route } from "tsoa";
 @Route("candidates")
 export class CandidateService {
 
-  private candidateRepository!: WorldCupRepositoryBase;
+  private candidateRepository: WorldCupRepositoryBase;
 
   constructor(candidateRepository: WorldCupRepositoryBase) {
     this.candidateRepository = candidateRepository;

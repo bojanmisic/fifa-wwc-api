@@ -54,18 +54,6 @@
 				],
 				"description": "A branded type for positive numbers.\n\nThis type ensures that the number is strictly greater than zero, representing a positive value."
 			},
-			"FifaFederation": {
-				"description": "Enum representing the various FIFA federations.",
-				"enum": [
-					"AFC",
-					"CAF",
-					"CONCACAF",
-					"CONMEBOL",
-					"OFC",
-					"UEFA"
-				],
-				"type": "string"
-			},
 			"WorldRegion": {
 				"description": "Enum representing the different world regions.",
 				"enum": [
@@ -139,14 +127,6 @@
 						"type": "string",
 						"description": "The official name of the country."
 					},
-					"fifaRank": {
-						"$ref": "#/components/schemas/PositiveNumber",
-						"description": "The FIFA ranking of the team, where a lower number indicates a higher rank.\nThis value is optional and may not be present for all teams."
-					},
-					"federation": {
-						"$ref": "#/components/schemas/FifaFederation",
-						"description": "The football federation the team belongs to (e.g., UEFA, CONMEBOL)."
-					},
 					"area": {
 						"$ref": "#/components/schemas/PositiveNumber",
 						"description": "The total area of the country in square kilometers."
@@ -183,8 +163,6 @@
 				"required": [
 					"countryCode",
 					"countryName",
-					"fifaRank",
-					"federation",
 					"area",
 					"population",
 					"region",
@@ -217,7 +195,7 @@
 				"operationId": "GetAllCandidates",
 				"responses": {
 					"200": {
-						"description": "Ok",
+						"description": "An array of `Candidate` objects.",
 						"content": {
 							"application/json": {
 								"schema": {
@@ -230,8 +208,105 @@
 						}
 					}
 				},
+				"description": "Retrieves all candidates based on the provided query parameters.",
+				"tags": [
+					"Candidates"
+				],
 				"security": [],
-				"parameters": []
+				"parameters": [
+					{
+						"description": "- The minimum area to filter candidates by.",
+						"in": "query",
+						"name": "minArea",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"description": "- The maximum area to filter candidates by.",
+						"in": "query",
+						"name": "maxArea",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"description": "- The minimum population to filter candidates by.",
+						"in": "query",
+						"name": "minPopulation",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"description": "- The maximum population to filter candidates by.",
+						"in": "query",
+						"name": "maxPopulation",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"description": "- The region (continent) to filter candidates by.",
+						"in": "query",
+						"name": "region",
+						"required": false,
+						"schema": {
+							"$ref": "#/components/schemas/WorldRegion"
+						}
+					},
+					{
+						"description": "- The subregion (e.g., Caribbean, Melanesia) to filter candidates by.",
+						"in": "query",
+						"name": "subregion",
+						"required": false,
+						"schema": {
+							"$ref": "#/components/schemas/WorldSubregion"
+						}
+					},
+					{
+						"description": "- The property to sort candidates by.",
+						"in": "query",
+						"name": "sortBy",
+						"required": false,
+						"schema": {
+							"type": "string",
+							"enum": [
+								"countryCode",
+								"countryName",
+								"area",
+								"population",
+								"region",
+								"subregion",
+								"capital",
+								"teamName",
+								"teamIconSvgUrl",
+								"countryFlagSvgUrl"
+							]
+						}
+					},
+					{
+						"description": "- The order to sort candidates by.",
+						"in": "query",
+						"name": "sortOrder",
+						"required": false,
+						"schema": {
+							"type": "string",
+							"enum": [
+								"asc",
+								"desc"
+							]
+						}
+					}
+				]
 			}
 		}
 	},

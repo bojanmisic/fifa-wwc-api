@@ -1,5 +1,4 @@
 import { CountryCode, PositiveNumber, Url } from "./types/index";
-import { FifaFederation } from "./enums/index";
 
 /**
  * Represents the details for a FIFA team.
@@ -19,17 +18,7 @@ export interface TeamDetails {
     /**
      * The URL to the team's icon or flag image in SVG format.
      */
-    teamIconSvgUrl: Url;
-  
-    /**
-     * The FIFA ranking of the team, where a lower number indicates a higher rank.
-     */
-    fifaRank: PositiveNumber;
-  
-    /**
-     * The football federation the team belongs to (e.g., UEFA, CONMEBOL).
-     */
-    federation: FifaFederation;
+    teamIconSvgUrl: Url;  
 
     /**
      * The rank of the team within its specific group during a tournament.
@@ -60,22 +49,6 @@ export interface TeamDetails {
  * Represents a filter for filtering team details based on various criteria.
  */
 export interface TeamDetailsFilter {
-  
-    /**
-     * The minimum FIFA rank to filter teams by.
-     */
-    minFifaRank?: PositiveNumber;
-  
-    /**
-     * The maximum FIFA rank to filter teams by.
-     */
-    maxFifaRank?: PositiveNumber;
-  
-    /**
-     * The FIFA federation to filter teams by.
-     */
-    federation?: FifaFederation;
-  
     /**
      * The minimum group rank to filter teams by.
      */

@@ -5,45 +5,52 @@ import { CandidateFilter, Candidate } from "../model/candidate";
 import { CountryDetails, CountryDetailsFilter } from "../model/country-details";
 import { CountryHeader, CountryHeaderFilter } from "../model/country-header";
 import { TeamDetails, TeamDetailsFilter } from "../model/team-details";
-import { TeamHeader, TeamHeaderFilter } from "../model/team-header";
+import { TeamHeader } from "../model/team-header";
 import { CountryCode } from "../model/types";
 import { Sort } from "../contract/sort.type";
+import { WorldRegion, WorldSubregion } from "src/model/enums";
 
 export class RealWorldCupRepository implements WorldCupRepositoryBase {
 
-    private wwcApiService!: WwcApi;
-    private countriesApiService!: CountriesApi;
+    private wwcApiService: WwcApi;
+    private countriesApiService: CountriesApi;
 
     constructor() {
-        this.wwcApiService = new WwcApi();
-        this.countriesApiService = new CountriesApi();
+        this.wwcApiService = new WwcApi("https://api.openligadb.de");
+        this.countriesApiService = new CountriesApi("https://restcountries.com");
     }
 
     public async getCandidates(filter?: CandidateFilter, sort?: Sort<Candidate>): Promise<Candidate[]> {
         try {
             const wwcTeams = await this.wwcApiService.getavailableteamsLeagueShortcutLeagueSeasonGet("wwc", 2023);
             try {
-                const countries = await this.countriesApiService.v31AllGet();
+                const countriesResponse = await this.countriesApiService.v31AllGet();
+                const countries = await countriesResponse.json();
 
                 // Mapping the teams to the candidates
                 let candidates = wwcTeams.map(team => {
-                    const country = (countries as any).find((c: any) => c.cca3 === team.shortName);
+                    const country = countries.find((c: any) => 
+                        c.cioc === team.shortName || 
+                        c.cca3 === team.shortName ||
+                        team.shortName === "ENG" && c.cca3 === "GBR"
+                    );
                     return {
                         teamName: team.teamName,
                         countryCode: team.shortName,
                         teamIconSvgUrl: team.teamIconUrl,
-                        federation: team.teamGroupName,
                         countryName: country?.name.common,
-                        countryFlagSvgUrl: country?.flags.png,
+                        countryFlagSvgUrl: country?.flags.svg,
+                        region: country?.region as WorldRegion,
+                        subregion: country?.subregion as WorldSubregion,
+                        capital: country?.capital[0],
+                        population: country?.population,
+                        area: country?.area,
                       } as Candidate;
                 });
 
                 // Apply filtering
                 if (filter) {
                     candidates = candidates.filter(candidate => {
-                        if (filter.minFifaRank !== undefined && candidate.fifaRank <= filter.minFifaRank) return false;
-                        if (filter.maxFifaRank !== undefined && candidate.fifaRank >= filter.maxFifaRank) return false;
-                        if (filter.federation !== undefined && candidate.federation !== filter.federation) return false;
                         if (filter.minArea !== undefined && candidate.area <= filter.minArea) return false;
                         if (filter.maxArea !== undefined && candidate.area >= filter.maxArea) return false;
                         if (filter.minPopulation !== undefined && candidate.population <= filter.minPopulation) return false;
@@ -77,8 +84,8 @@ export class RealWorldCupRepository implements WorldCupRepositoryBase {
         }
     }
 
-    public async getTeamHeaders(filter?: TeamHeaderFilter, sort?: Sort<TeamHeader>): Promise<TeamHeader[]> {
-        // Implementation logic to retrieve team headers based on filter and sort criteria
+    public async getTeamHeaders(sort?: Sort<TeamHeader>): Promise<TeamHeader[]> {
+        // Implementation logic to retrieve team headers based on sort criteria
         return [];
     }
 

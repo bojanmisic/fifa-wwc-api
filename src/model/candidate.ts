@@ -1,5 +1,8 @@
-import { CountryCode, PositiveNumber, Url } from "./types/index";
-import { FifaFederation, WorldRegion, WorldSubregion } from "./enums/index";
+import { WorldRegion } from "./enums/world-region.enum";
+import { WorldSubregion } from "./enums/world-subregion.enum";
+import { CountryCode } from "./types/country-code.type";
+import { PositiveNumber } from "./types/positive-number.type";
+import { Url } from "./types/url.type";
 
 /**
    * Represents a candidate country for hosting the FIFA World Cup.
@@ -8,6 +11,9 @@ import { FifaFederation, WorldRegion, WorldSubregion } from "./enums/index";
 export interface Candidate {
     /**
      * The ISO 3166-1 alpha-3 country code.
+     * @isString Must be string with 3 characters
+     * @minLength 3 Must be string with 3 characters
+     * @maxLength 3 Must be string with 3 characters
      */
     countryCode: CountryCode;
   
@@ -15,17 +21,6 @@ export interface Candidate {
      * The official name of the country.
      */
     countryName: string;
-  
-    /**
-     * The FIFA ranking of the team, where a lower number indicates a higher rank.
-     * This value is optional and may not be present for all teams.
-     */
-    fifaRank: PositiveNumber;
-  
-    /**
-     * The football federation the team belongs to (e.g., UEFA, CONMEBOL).
-     */
-    federation: FifaFederation;
   
     /**
      * The total area of the country in square kilometers.
@@ -72,18 +67,6 @@ export interface Candidate {
    * Represents a filter for filtering candidates based on various criteria.
    */
   export interface CandidateFilter {
-    /**
-     * The minimum FIFA rank to filter candidates by.
-     */
-    minFifaRank?: PositiveNumber;
-    /**
-     * The maximum FIFA rank to filter candidates by.
-     */
-    maxFifaRank?: PositiveNumber;
-    /**
-     * The FIFA federation to filter candidates by.
-     */
-    federation?: FifaFederation;
     /**
      * The minimum area to filter candidates by.
      */
