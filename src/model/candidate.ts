@@ -67,3 +67,45 @@ export interface Candidate {
      */
     countryFlagSvgUrl: Url;
   }
+
+  /**
+   * Represents a filter for filtering candidates based on various criteria.
+   */
+  export interface CandidateFilter {
+    /**
+     * The minimum FIFA rank to filter candidates by.
+     */
+    minFifaRank?: PositiveNumber;
+    /**
+     * The maximum FIFA rank to filter candidates by.
+     */
+    maxFifaRank?: PositiveNumber;
+    /**
+     * The FIFA federation to filter candidates by.
+     */
+    federation?: FifaFederation;
+    /**
+     * The minimum area to filter candidates by.
+     */
+    minArea?: PositiveNumber;
+    /**
+     * The maximum area to filter candidates by.
+     */
+    maxArea?: PositiveNumber;
+    /**
+     * The minimum population to filter candidates by.
+     */
+    minPopulation?: PositiveNumber;
+    /**
+     * The maximum population to filter candidates by.
+     */
+    maxPopulation?: PositiveNumber;
+    /**
+     * The region (continent) to filter candidates by.
+     */
+    region?: WorldRegion;
+    /**
+     * The subregion (e.g., Caribbean, Melanesia) to filter candidates by.
+     */
+    subregion?: WorldSubregion;
+  }

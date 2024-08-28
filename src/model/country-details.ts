@@ -70,3 +70,88 @@ export interface CountryDetails {
      */
     independent: boolean;
   }
+
+/**
+ * Represents a filter for filtering country details based on various criteria.
+ */
+export interface CountryDetailsFilter {  
+    /**
+     * The minimum area to filter countries by.
+     */
+    minArea?: PositiveNumber;
+  
+    /**
+     * The maximum area to filter countries by.
+     */
+    maxArea?: PositiveNumber;
+  
+    /**
+     * The minimum population to filter countries by.
+     */
+    minPopulation?: PositiveNumber;
+  
+    /**
+     * The maximum population to filter countries by.
+     */
+    maxPopulation?: PositiveNumber;
+  
+    /**
+     * The region (continent) to filter countries by.
+     */
+    region?: WorldRegion;
+  
+    /**
+     * The subregion within the continent to filter countries by.
+     */
+    subregion?: WorldSubregion;
+  
+    /**
+     * The capital city to filter countries by.
+     */
+    capital?: string;
+  
+    /**
+     * A specific language to filter countries by.
+     */
+    languages?: string[];
+  
+    /**
+     * A specific currency to filter countries by.
+     */
+    currencies?: string[];
+  
+    /**
+     * The minimum latitude to filter countries by.
+     */
+    minLatitude?: Latitude;
+  
+    /**
+     * The maximum latitude to filter countries by.
+     */
+    maxLatitude?: Latitude;
+    
+    /**
+     * The minimum longitude to filter countries by.
+     */
+    minLongitude?: Longitude;
+
+    /**
+     * The maximum longitude to filter countries by.
+     */
+    maxLongitude?: Longitude;
+  
+    /**
+     * A specific timezone to filter countries by.
+     */
+    timezones?: Timezone[];
+  
+    /**
+     * A country code to filter by, for countries that share a border with the specified country.
+     */
+    borders?: CountryCode[];
+  
+    /**
+     * Whether the country is recognized as an independent state.
+     */
+    independent?: boolean;
+  }

@@ -31,3 +31,24 @@ export interface TeamHeader {
      */
     federation: FifaFederation;
 }
+
+/**
+ * Represents a filter for filtering team headers based on various criteria.
+ */
+export interface TeamHeaderFilter {
+  
+    /**
+     * The minimum FIFA rank to filter teams by.
+     */
+    minFifaRank?: PositiveNumber;
+  
+    /**
+     * The maximum FIFA rank to filter teams by.
+     */
+    maxFifaRank?: PositiveNumber;
+  
+    /**
+     * The FIFA federation to filter teams by.
+     */
+    federation?: FifaFederation;
+  }

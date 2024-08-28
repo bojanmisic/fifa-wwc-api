@@ -1,12 +1,18 @@
 {
     "entryFile": "src/app.ts",
     "noImplicitAdditionalProperties": "throw-on-extras",
-    "controllerPathGlobs": ["src/**/*Controller.ts"],
+    "controllerPathGlobs": ["src/**/*-controller.ts"],
     "spec": {
       "outputDirectory": "src",
       "specVersion": 3
     },
     "routes": {
       "routesDir": "src/routes"
-    }
+    },
+    "compilerOptions": {
+      "paths": {
+        "types": ["src/model/types/index.ts"],
+        "enums": ["src/model/enums/index.ts"]
+      }
   }
+}

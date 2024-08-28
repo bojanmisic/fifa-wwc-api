@@ -40,3 +40,33 @@ export interface CountryHeader {
      */
     countryFlagSvgUrl: Url;
 }
+
+  /**
+   * Represents a filter for filtering country headers based on various criteria.
+   */
+  export interface CountryHeaderFilter {
+    /**
+     * The minimum area to filter country headers by.
+     */
+    minArea?: PositiveNumber;
+    /**
+     * The maximum area to filter country headers by.
+     */
+    maxArea?: PositiveNumber;
+    /**
+     * The minimum population to filter country headers by.
+     */
+    minPopulation?: PositiveNumber;
+    /**
+     * The maximum population to filter country headers by.
+     */
+    maxPopulation?: PositiveNumber;
+    /**
+     * The region (continent) to filter country headers by.
+     */
+    region?: WorldRegion;
+    /**
+     * The subregion (e.g., Caribbean, Melanesia) to filter country headers by.
+     */
+    subregion?: WorldSubregion;
+  }

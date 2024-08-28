@@ -2,7 +2,7 @@ import { CountryCode, PositiveNumber, Url } from "./types/index";
 import { FifaFederation } from "./enums/index";
 
 /**
- * Represents the essential header information for a FIFA team.
+ * Represents the details for a FIFA team.
  */
 export interface TeamDetails {
     
@@ -55,3 +55,64 @@ export interface TeamDetails {
      */
     goalsConceded: PositiveNumber;
 }
+
+/**
+ * Represents a filter for filtering team details based on various criteria.
+ */
+export interface TeamDetailsFilter {
+  
+    /**
+     * The minimum FIFA rank to filter teams by.
+     */
+    minFifaRank?: PositiveNumber;
+  
+    /**
+     * The maximum FIFA rank to filter teams by.
+     */
+    maxFifaRank?: PositiveNumber;
+  
+    /**
+     * The FIFA federation to filter teams by.
+     */
+    federation?: FifaFederation;
+  
+    /**
+     * The minimum group rank to filter teams by.
+     */
+    minGroupRank?: PositiveNumber;
+  
+    /**
+     * The maximum group rank to filter teams by.
+     */
+    maxGroupRank?: PositiveNumber;
+  
+    /**
+     * The minimum total rank to filter teams by.
+     */
+    minTotalRank?: PositiveNumber;
+  
+    /**
+     * The maximum total rank to filter teams by.
+     */
+    maxTotalRank?: PositiveNumber;
+  
+    /**
+     * The minimum number of goals scored to filter teams by.
+     */
+    minGoalsScored?: PositiveNumber;
+  
+    /**
+     * The maximum number of goals scored to filter teams by.
+     */
+    maxGoalsScored?: PositiveNumber;
+  
+    /**
+     * The minimum number of goals conceded to filter teams by.
+     */
+    minGoalsConceded?: PositiveNumber;
+  
+    /**
+     * The maximum number of goals conceded to filter teams by.
+     */
+    maxGoalsConceded?: PositiveNumber;
+  }
