@@ -204,9 +204,15 @@ import {
       }
     }
 
-
-
-
+    /**
+     * Retrieves all teams based on the provided query parameters.
+     * 
+     * @param sortBy - The property to sort teams by.
+     * @param sortOrder - The order to sort teams by (asc/desc).
+     * @returns An array of `TeamHeader` objects.
+     * 
+     * @summary Get the list of all FIFA World Cup 2024 teams with essential information.
+     */
     @Get("team")
     @Tags("Teams")
     public async getAllTeams(
@@ -233,6 +239,23 @@ import {
       }
     }
 
+    /**
+     * Retrieves all teams details based on the provided query parameters.
+     * 
+     * @param minGroupRank - The minimum group rank to filter teams by (positive number).
+     * @param maxGroupRank - The maximum group rank to filter teams by (positive number).
+     * @param minTotalRank - The minimum total rank to filter teams by (positive number).
+     * @param maxTotalRank - The maximum total rank to filter teams by (positive number).
+     * @param minGoalsScored - The minimum goals scored to filter teams by (positive number).
+     * @param maxGoalsScored - The maximum goals scored to filter teams by (positive number).
+     * @param minGoalsConceded - The minimum goals conceded to filter teams by (positive number).
+     * @param maxGoalsConceded - The maximum goals conceded to filter teams by (positive number).
+     * @param sortBy - The property to sort teams by.
+     * @param sortOrder - The order to sort teams by (asc/desc).
+     * @returns An array of `TeamDetails` objects.
+     * 
+     * @summary Get the list of all FIFA World Cup 2024 teams with detailed information.
+     */
     @Get("team/details")
     @Tags("Teams")
     public async getAllTeamDetails(
@@ -277,6 +300,14 @@ import {
         }
       }
 
+      /**
+       * Retrieves a candidate by country code.
+       * 
+       * @param countryCode - The country code or fifa code to filter candidates by.
+       * @returns A `Candidate` object or null if not found.
+       * 
+       * @summary Get the candidate information for a given country code or fifa code.
+       */
       @Get("{countryCode}")
       @Tags("Candidates")
       public async getCandidateByCountryCode(
@@ -302,6 +333,14 @@ import {
         }
       }
 
+      /**
+       * Retrieves a country header by country code or fifa code.
+       * 
+       * @param countryCode - The country code or fifa code to filter countries by.
+       * @returns A `CountryHeader` object or null if not found.
+       * 
+       * @summary Get the country header information for a given country code or fifa code.
+       */
       @Get("{countryCode}/country")
       @Tags("Countries")
       public async getCountryHeaderByCountryCode(
@@ -327,6 +366,14 @@ import {
         }
       }
 
+      /**
+       * Retrieves a country details by country code or fifa code.
+       * 
+       * @param countryCode - The country code or fifa code to filter countries by.
+       * @returns A `CountryDetails` object or null if not found.
+       * 
+       * @summary Get the country details information for a given country code or fifa code.
+       */
       @Get("{countryCode}/country/details")
       @Tags("Countries")
       public async getCountryDetailsByCountryCode(
@@ -353,6 +400,14 @@ import {
         }
       }
 
+      /**
+       * Retrieves a team header by country code or fifa code.
+       * 
+       * @param countryCode - The country code or fifa code to filter teams by.
+       * @returns A `TeamHeader` object or null if not found.
+       * 
+       * @summary Get the team header information for a given country code or fifa code.
+       */
       @Get("{countryCode}/team")
       @Tags("Teams")
       public async getTeamHeaderByCountryCode(
@@ -379,6 +434,14 @@ import {
         }
       }
 
+      /**
+       * Retrieves a team details by country code or fifa code.
+       * 
+       * @param countryCode - The country code or fifa code to filter teams by.
+       * @returns A `TeamDetails` object or null if not found.
+       * 
+       * @summary Get the team details information for a given country code or fifa code.
+       */
       @Get("{countryCode}/team/details")
       @Tags("Teams")
       public async getTeamDetailsByCountryCode(
