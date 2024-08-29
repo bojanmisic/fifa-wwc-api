@@ -42,6 +42,7 @@ const models: TsoaRoute.Models = {
         "dataType": "refObject",
         "properties": {
             "countryCode": {"ref":"CountryCode","required":true,"validators":{"isString":{"errorMsg":"Must be string with 3 characters"},"minLength":{"errorMsg":"Must be string with 3 characters","value":3},"maxLength":{"errorMsg":"Must be string with 3 characters","value":3}}},
+            "fifaCode": {"ref":"CountryCode","required":true},
             "countryName": {"dataType":"string","required":true},
             "area": {"ref":"PositiveNumber","required":true},
             "population": {"ref":"PositiveNumber","required":true},
@@ -60,6 +61,7 @@ const models: TsoaRoute.Models = {
         "properties": {
             "countryName": {"dataType":"string","required":true},
             "countryCode": {"ref":"CountryCode","required":true},
+            "fifaCode": {"ref":"CountryCode","required":true},
             "area": {"ref":"PositiveNumber","required":true},
             "population": {"ref":"PositiveNumber","required":true},
             "region": {"ref":"WorldRegion","required":true},
@@ -88,6 +90,7 @@ const models: TsoaRoute.Models = {
         "dataType": "refObject",
         "properties": {
             "countryCode": {"ref":"CountryCode","required":true},
+            "fifaCode": {"ref":"CountryCode","required":true},
             "countryName": {"dataType":"string","required":true},
             "area": {"ref":"PositiveNumber","required":true},
             "population": {"ref":"PositiveNumber","required":true},
@@ -109,6 +112,7 @@ const models: TsoaRoute.Models = {
         "dataType": "refObject",
         "properties": {
             "countryCode": {"ref":"CountryCode","required":true},
+            "fifaCode": {"ref":"CountryCode","required":true},
             "teamName": {"dataType":"string","required":true},
             "teamIconSvgUrl": {"ref":"Url","required":true},
         },
@@ -119,6 +123,7 @@ const models: TsoaRoute.Models = {
         "dataType": "refObject",
         "properties": {
             "countryCode": {"ref":"CountryCode","required":true},
+            "fifaCode": {"ref":"CountryCode","required":true},
             "teamName": {"dataType":"string","required":true},
             "teamIconSvgUrl": {"ref":"Url","required":true},
             "groupRank": {"ref":"PositiveNumber","required":true},
@@ -158,7 +163,7 @@ export function RegisterRoutes(app: Router) {
                     maxPopulation: {"in":"query","name":"maxPopulation","dataType":"double"},
                     region: {"in":"query","name":"region","ref":"WorldRegion"},
                     subregion: {"in":"query","name":"subregion","ref":"WorldSubregion"},
-                    sortBy: {"in":"query","name":"sortBy","dataType":"enum","enums":["countryCode","countryName","area","population","region","subregion","capital","teamName","teamIconSvgUrl","countryFlagSvgUrl"]},
+                    sortBy: {"in":"query","name":"sortBy","dataType":"enum","enums":["countryCode","fifaCode","countryName","area","population","region","subregion","capital","teamName","teamIconSvgUrl","countryFlagSvgUrl"]},
                     sortOrder: {"in":"query","name":"sortOrder","dataType":"union","subSchemas":[{"dataType":"enum","enums":["asc"]},{"dataType":"enum","enums":["desc"]}]},
             };
 
@@ -191,7 +196,7 @@ export function RegisterRoutes(app: Router) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     region: {"in":"query","name":"region","ref":"WorldRegion"},
                     subregion: {"in":"query","name":"subregion","ref":"WorldSubregion"},
-                    sortBy: {"in":"query","name":"sortBy","dataType":"enum","enums":["countryCode","countryName","area","population","region","subregion","countryFlagSvgUrl"]},
+                    sortBy: {"in":"query","name":"sortBy","dataType":"enum","enums":["countryCode","fifaCode","countryName","area","population","region","subregion","countryFlagSvgUrl"]},
                     sortOrder: {"in":"query","name":"sortOrder","dataType":"union","subSchemas":[{"dataType":"enum","enums":["asc"]},{"dataType":"enum","enums":["desc"]}]},
             };
 
@@ -236,7 +241,7 @@ export function RegisterRoutes(app: Router) {
                     borders: {"in":"query","name":"borders","dataType":"array","array":{"dataType":"string"}},
                     languages: {"in":"query","name":"languages","dataType":"array","array":{"dataType":"string"}},
                     currencies: {"in":"query","name":"currencies","dataType":"array","array":{"dataType":"string"}},
-                    sortBy: {"in":"query","name":"sortBy","dataType":"enum","enums":["countryCode","countryName","area","population","region","subregion","capital","languages","currencies","latitude","longitude","timezones","borders","independent"]},
+                    sortBy: {"in":"query","name":"sortBy","dataType":"enum","enums":["countryCode","fifaCode","countryName","area","population","region","subregion","capital","languages","currencies","latitude","longitude","timezones","borders","independent"]},
                     sortOrder: {"in":"query","name":"sortOrder","dataType":"union","subSchemas":[{"dataType":"enum","enums":["asc"]},{"dataType":"enum","enums":["desc"]}]},
             };
 
@@ -267,7 +272,7 @@ export function RegisterRoutes(app: Router) {
 
             async function CandidateController_getAllTeams(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
-                    sortBy: {"in":"query","name":"sortBy","dataType":"enum","enums":["countryCode","teamName","teamIconSvgUrl"]},
+                    sortBy: {"in":"query","name":"sortBy","dataType":"enum","enums":["countryCode","fifaCode","teamName","teamIconSvgUrl"]},
                     sortOrder: {"in":"query","name":"sortOrder","dataType":"union","subSchemas":[{"dataType":"enum","enums":["asc"]},{"dataType":"enum","enums":["desc"]}]},
             };
 
@@ -306,7 +311,7 @@ export function RegisterRoutes(app: Router) {
                     maxGoalsScored: {"in":"query","name":"maxGoalsScored","dataType":"double"},
                     minGoalsConceded: {"in":"query","name":"minGoalsConceded","dataType":"double"},
                     maxGoalsConceded: {"in":"query","name":"maxGoalsConceded","dataType":"double"},
-                    sortBy: {"in":"query","name":"sortBy","dataType":"enum","enums":["countryCode","teamName","teamIconSvgUrl","groupRank","totalRank","goalsScored","goalsConceded"]},
+                    sortBy: {"in":"query","name":"sortBy","dataType":"enum","enums":["countryCode","fifaCode","teamName","teamIconSvgUrl","groupRank","totalRank","goalsScored","goalsConceded"]},
                     sortOrder: {"in":"query","name":"sortOrder","dataType":"union","subSchemas":[{"dataType":"enum","enums":["asc"]},{"dataType":"enum","enums":["desc"]}]},
             };
 

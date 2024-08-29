@@ -123,6 +123,10 @@
 						"$ref": "#/components/schemas/CountryCode",
 						"description": "The ISO 3166-1 alpha-3 country code."
 					},
+					"fifaCode": {
+						"$ref": "#/components/schemas/CountryCode",
+						"description": "The FIFA country code, used as a unique identifier."
+					},
 					"countryName": {
 						"type": "string",
 						"description": "The official name of the country."
@@ -162,6 +166,7 @@
 				},
 				"required": [
 					"countryCode",
+					"fifaCode",
 					"countryName",
 					"area",
 					"population",
@@ -185,6 +190,10 @@
 					"countryCode": {
 						"$ref": "#/components/schemas/CountryCode",
 						"description": "The ISO 3166-1 alpha-3 country code."
+					},
+					"fifaCode": {
+						"$ref": "#/components/schemas/CountryCode",
+						"description": "The FIFA country code."
 					},
 					"area": {
 						"$ref": "#/components/schemas/PositiveNumber",
@@ -210,6 +219,7 @@
 				"required": [
 					"countryName",
 					"countryCode",
+					"fifaCode",
 					"area",
 					"population",
 					"region",
@@ -297,6 +307,10 @@
 						"$ref": "#/components/schemas/CountryCode",
 						"description": "The ISO 3166-1 alpha-3 country code, used as a unique identifier."
 					},
+					"fifaCode": {
+						"$ref": "#/components/schemas/CountryCode",
+						"description": "The FIFA country code, used as a unique identifier."
+					},
 					"countryName": {
 						"type": "string",
 						"description": "The official name of the country."
@@ -364,6 +378,7 @@
 				},
 				"required": [
 					"countryCode",
+					"fifaCode",
 					"countryName",
 					"area",
 					"population",
@@ -388,6 +403,10 @@
 						"$ref": "#/components/schemas/CountryCode",
 						"description": "The ISO 3166-1 alpha-3 country code, used for cross-referencing with country data."
 					},
+					"fifaCode": {
+						"$ref": "#/components/schemas/CountryCode",
+						"description": "The FIFA country code, used as a unique identifier."
+					},
 					"teamName": {
 						"type": "string",
 						"description": "The name of the team, usually the name of the country it represents."
@@ -399,6 +418,7 @@
 				},
 				"required": [
 					"countryCode",
+					"fifaCode",
 					"teamName",
 					"teamIconSvgUrl"
 				],
@@ -411,6 +431,10 @@
 					"countryCode": {
 						"$ref": "#/components/schemas/CountryCode",
 						"description": "The ISO 3166-1 alpha-3 country code, used for cross-referencing with country data."
+					},
+					"fifaCode": {
+						"$ref": "#/components/schemas/CountryCode",
+						"description": "The FIFA country code, used as a unique identifier."
 					},
 					"teamName": {
 						"type": "string",
@@ -439,6 +463,7 @@
 				},
 				"required": [
 					"countryCode",
+					"fifaCode",
 					"teamName",
 					"teamIconSvgUrl",
 					"groupRank",
@@ -556,6 +581,7 @@
 							"type": "string",
 							"enum": [
 								"countryCode",
+								"fifaCode",
 								"countryName",
 								"area",
 								"population",
@@ -636,6 +662,7 @@
 							"type": "string",
 							"enum": [
 								"countryCode",
+								"fifaCode",
 								"countryName",
 								"area",
 								"population",
@@ -841,6 +868,7 @@
 							"type": "string",
 							"enum": [
 								"countryCode",
+								"fifaCode",
 								"countryName",
 								"area",
 								"population",
@@ -878,7 +906,7 @@
 				"operationId": "GetAllTeams",
 				"responses": {
 					"200": {
-						"description": "Ok",
+						"description": "An array of `TeamHeader` objects.",
 						"content": {
 							"application/json": {
 								"schema": {
@@ -891,12 +919,15 @@
 						}
 					}
 				},
+				"description": "Retrieves all teams based on the provided query parameters.",
+				"summary": "Get the list of all FIFA World Cup 2024 teams with essential information.",
 				"tags": [
 					"Teams"
 				],
 				"security": [],
 				"parameters": [
 					{
+						"description": "- The property to sort teams by.",
 						"in": "query",
 						"name": "sortBy",
 						"required": false,
@@ -904,12 +935,14 @@
 							"type": "string",
 							"enum": [
 								"countryCode",
+								"fifaCode",
 								"teamName",
 								"teamIconSvgUrl"
 							]
 						}
 					},
 					{
+						"description": "- The order to sort teams by (asc/desc).",
 						"in": "query",
 						"name": "sortOrder",
 						"required": false,
@@ -929,7 +962,7 @@
 				"operationId": "GetAllTeamDetails",
 				"responses": {
 					"200": {
-						"description": "Ok",
+						"description": "An array of `TeamDetails` objects.",
 						"content": {
 							"application/json": {
 								"schema": {
@@ -942,12 +975,15 @@
 						}
 					}
 				},
+				"description": "Retrieves all teams details based on the provided query parameters.",
+				"summary": "Get the list of all FIFA World Cup 2024 teams with detailed information.",
 				"tags": [
 					"Teams"
 				],
 				"security": [],
 				"parameters": [
 					{
+						"description": "- The minimum group rank to filter teams by (positive number).",
 						"in": "query",
 						"name": "minGroupRank",
 						"required": false,
@@ -957,6 +993,7 @@
 						}
 					},
 					{
+						"description": "- The maximum group rank to filter teams by (positive number).",
 						"in": "query",
 						"name": "maxGroupRank",
 						"required": false,
@@ -966,6 +1003,7 @@
 						}
 					},
 					{
+						"description": "- The minimum total rank to filter teams by (positive number).",
 						"in": "query",
 						"name": "minTotalRank",
 						"required": false,
@@ -975,6 +1013,7 @@
 						}
 					},
 					{
+						"description": "- The maximum total rank to filter teams by (positive number).",
 						"in": "query",
 						"name": "maxTotalRank",
 						"required": false,
@@ -984,6 +1023,7 @@
 						}
 					},
 					{
+						"description": "- The minimum goals scored to filter teams by (positive number).",
 						"in": "query",
 						"name": "minGoalsScored",
 						"required": false,
@@ -993,6 +1033,7 @@
 						}
 					},
 					{
+						"description": "- The maximum goals scored to filter teams by (positive number).",
 						"in": "query",
 						"name": "maxGoalsScored",
 						"required": false,
@@ -1002,6 +1043,7 @@
 						}
 					},
 					{
+						"description": "- The minimum goals conceded to filter teams by (positive number).",
 						"in": "query",
 						"name": "minGoalsConceded",
 						"required": false,
@@ -1011,6 +1053,7 @@
 						}
 					},
 					{
+						"description": "- The maximum goals conceded to filter teams by (positive number).",
 						"in": "query",
 						"name": "maxGoalsConceded",
 						"required": false,
@@ -1020,6 +1063,7 @@
 						}
 					},
 					{
+						"description": "- The property to sort teams by.",
 						"in": "query",
 						"name": "sortBy",
 						"required": false,
@@ -1027,6 +1071,7 @@
 							"type": "string",
 							"enum": [
 								"countryCode",
+								"fifaCode",
 								"teamName",
 								"teamIconSvgUrl",
 								"groupRank",
@@ -1037,6 +1082,7 @@
 						}
 					},
 					{
+						"description": "- The order to sort teams by (asc/desc).",
 						"in": "query",
 						"name": "sortOrder",
 						"required": false,
@@ -1056,7 +1102,7 @@
 				"operationId": "GetCandidateByCountryCode",
 				"responses": {
 					"200": {
-						"description": "Ok",
+						"description": "A `Candidate` object or null if not found.",
 						"content": {
 							"application/json": {
 								"schema": {
@@ -1071,12 +1117,15 @@
 						}
 					}
 				},
+				"description": "Retrieves a candidate by country code.",
+				"summary": "Get the candidate information for a given country code or fifa code.",
 				"tags": [
 					"Candidates"
 				],
 				"security": [],
 				"parameters": [
 					{
+						"description": "- The country code or fifa code to filter candidates by.",
 						"in": "path",
 						"name": "countryCode",
 						"required": true,
@@ -1092,7 +1141,7 @@
 				"operationId": "GetCountryHeaderByCountryCode",
 				"responses": {
 					"200": {
-						"description": "Ok",
+						"description": "A `CountryHeader` object or null if not found.",
 						"content": {
 							"application/json": {
 								"schema": {
@@ -1107,12 +1156,15 @@
 						}
 					}
 				},
+				"description": "Retrieves a country header by country code or fifa code.",
+				"summary": "Get the country header information for a given country code or fifa code.",
 				"tags": [
 					"Countries"
 				],
 				"security": [],
 				"parameters": [
 					{
+						"description": "- The country code or fifa code to filter countries by.",
 						"in": "path",
 						"name": "countryCode",
 						"required": true,
@@ -1128,7 +1180,7 @@
 				"operationId": "GetCountryDetailsByCountryCode",
 				"responses": {
 					"200": {
-						"description": "Ok",
+						"description": "A `CountryDetails` object or null if not found.",
 						"content": {
 							"application/json": {
 								"schema": {
@@ -1143,12 +1195,15 @@
 						}
 					}
 				},
+				"description": "Retrieves a country details by country code or fifa code.",
+				"summary": "Get the country details information for a given country code or fifa code.",
 				"tags": [
 					"Countries"
 				],
 				"security": [],
 				"parameters": [
 					{
+						"description": "- The country code or fifa code to filter countries by.",
 						"in": "path",
 						"name": "countryCode",
 						"required": true,
@@ -1164,7 +1219,7 @@
 				"operationId": "GetTeamHeaderByCountryCode",
 				"responses": {
 					"200": {
-						"description": "Ok",
+						"description": "A `TeamHeader` object or null if not found.",
 						"content": {
 							"application/json": {
 								"schema": {
@@ -1179,12 +1234,15 @@
 						}
 					}
 				},
+				"description": "Retrieves a team header by country code or fifa code.",
+				"summary": "Get the team header information for a given country code or fifa code.",
 				"tags": [
 					"Teams"
 				],
 				"security": [],
 				"parameters": [
 					{
+						"description": "- The country code or fifa code to filter teams by.",
 						"in": "path",
 						"name": "countryCode",
 						"required": true,
@@ -1200,7 +1258,7 @@
 				"operationId": "GetTeamDetailsByCountryCode",
 				"responses": {
 					"200": {
-						"description": "Ok",
+						"description": "A `TeamDetails` object or null if not found.",
 						"content": {
 							"application/json": {
 								"schema": {
@@ -1215,12 +1273,15 @@
 						}
 					}
 				},
+				"description": "Retrieves a team details by country code or fifa code.",
+				"summary": "Get the team details information for a given country code or fifa code.",
 				"tags": [
 					"Teams"
 				],
 				"security": [],
 				"parameters": [
 					{
+						"description": "- The country code or fifa code to filter teams by.",
 						"in": "path",
 						"name": "countryCode",
 						"required": true,
