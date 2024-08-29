@@ -16,6 +16,11 @@ export interface Candidate {
      * @maxLength 3 Must be string with 3 characters
      */
     countryCode: CountryCode;
+
+    /**
+     * The FIFA country code, used as a unique identifier.
+     */
+    fifaCode: CountryCode;  
   
     /**
      * The official name of the country.

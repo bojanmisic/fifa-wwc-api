@@ -51,7 +51,7 @@ export abstract class WorldCupRepositoryBase {
      * @param sort - Optional sorting criteria to order the list of team details.
      * @returns A promise that resolves to an array of `TeamDetails` objects.
      */
-    public abstract getAllTeamDetails(
+    public abstract getTeamDetails(
       filter?: TeamDetailsFilter,
       sort?: Sort<TeamDetails>
     ): Promise<TeamDetails[]>;
@@ -63,7 +63,7 @@ export abstract class WorldCupRepositoryBase {
      * @param sort - Optional sorting criteria to order the list of country details.
      * @returns A promise that resolves to an array of `CountryDetails` objects.
      */
-    public abstract getAllCountryDetails(
+    public abstract getCountryDetails(
       filter?: CountryDetailsFilter,
       sort?: Sort<CountryDetails>
     ): Promise<CountryDetails[]>;

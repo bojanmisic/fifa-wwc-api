@@ -9,6 +9,11 @@ export interface CountryDetails {
      * The ISO 3166-1 alpha-3 country code, used as a unique identifier.
      */
     countryCode: CountryCode;
+
+    /**
+     * The FIFA country code, used as a unique identifier.
+     */
+    fifaCode: CountryCode;
   
     /**
      * The official name of the country.
@@ -49,12 +54,17 @@ export interface CountryDetails {
      * An array of currencies used in the country.
      */
     currencies: string[];
-  
+
     /**
-     * The latitude and longitude coordinates of the country.
+     * The latitude of the country.
      */
-    latlng: [Latitude, Longitude];
-  
+    latitude: Latitude;
+
+    /**
+     * The longitude of the country.
+     */
+    longitude: Longitude;
+    
     /**
      * An array of timezones the country spans.
      */
@@ -104,11 +114,6 @@ export interface CountryDetailsFilter {
      * The subregion within the continent to filter countries by.
      */
     subregion?: WorldSubregion;
-  
-    /**
-     * The capital city to filter countries by.
-     */
-    capital?: string;
   
     /**
      * A specific language to filter countries by.

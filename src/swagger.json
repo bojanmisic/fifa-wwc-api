@@ -174,6 +174,280 @@
 				],
 				"type": "object",
 				"additionalProperties": false
+			},
+			"CountryHeader": {
+				"description": "Represents a country's header information including general geographic and demographic data.",
+				"properties": {
+					"countryName": {
+						"type": "string",
+						"description": "The name of the country."
+					},
+					"countryCode": {
+						"$ref": "#/components/schemas/CountryCode",
+						"description": "The ISO 3166-1 alpha-3 country code."
+					},
+					"area": {
+						"$ref": "#/components/schemas/PositiveNumber",
+						"description": "The total area of the country in square kilometers."
+					},
+					"population": {
+						"$ref": "#/components/schemas/PositiveNumber",
+						"description": "The population of the country."
+					},
+					"region": {
+						"$ref": "#/components/schemas/WorldRegion",
+						"description": "The region (continent) the country is part of (e.g., Europe, Asia)."
+					},
+					"subregion": {
+						"$ref": "#/components/schemas/WorldSubregion",
+						"description": "The subregion (e.g., Caribbean, Melanesia) the country is part of."
+					},
+					"countryFlagSvgUrl": {
+						"$ref": "#/components/schemas/Url",
+						"description": "The URL to the team's icon or flag image in SVG format."
+					}
+				},
+				"required": [
+					"countryName",
+					"countryCode",
+					"area",
+					"population",
+					"region",
+					"subregion",
+					"countryFlagSvgUrl"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Latitude": {
+				"allOf": [
+					{
+						"type": "number",
+						"format": "double"
+					},
+					{
+						"properties": {
+							"__brand": {
+								"type": "string",
+								"enum": [
+									"latitude"
+								],
+								"nullable": false
+							}
+						},
+						"required": [
+							"__brand"
+						],
+						"type": "object"
+					}
+				],
+				"description": "A branded type for latitude values.\n\nThis type ensures that the number representing latitude is within the valid range of -90 to 90."
+			},
+			"Longitude": {
+				"allOf": [
+					{
+						"type": "number",
+						"format": "double"
+					},
+					{
+						"properties": {
+							"__brand": {
+								"type": "string",
+								"enum": [
+									"longitude"
+								],
+								"nullable": false
+							}
+						},
+						"required": [
+							"__brand"
+						],
+						"type": "object"
+					}
+				],
+				"description": "A branded type for longitude values.\n\nThis type ensures that the number representing longitude is within the valid range of -180 to 180."
+			},
+			"Timezone": {
+				"allOf": [
+					{
+						"type": "string"
+					},
+					{
+						"properties": {
+							"__brand": {
+								"type": "string",
+								"enum": [
+									"timezone"
+								],
+								"nullable": false
+							}
+						},
+						"required": [
+							"__brand"
+						],
+						"type": "object"
+					}
+				],
+				"description": "A branded type for timezones.\n\nThis type is used to ensure that strings representing timezones are validated and adhere to the expected format."
+			},
+			"CountryDetails": {
+				"description": "Represents detailed geographic and demographic information for a country.",
+				"properties": {
+					"countryCode": {
+						"$ref": "#/components/schemas/CountryCode",
+						"description": "The ISO 3166-1 alpha-3 country code, used as a unique identifier."
+					},
+					"countryName": {
+						"type": "string",
+						"description": "The official name of the country."
+					},
+					"area": {
+						"$ref": "#/components/schemas/PositiveNumber",
+						"description": "The total area of the country in square kilometers."
+					},
+					"population": {
+						"$ref": "#/components/schemas/PositiveNumber",
+						"description": "The population of the country."
+					},
+					"region": {
+						"$ref": "#/components/schemas/WorldRegion",
+						"description": "The region (continent) where the country is located (e.g., Europe, Americas)."
+					},
+					"subregion": {
+						"$ref": "#/components/schemas/WorldSubregion",
+						"description": "The subregion within the continent (e.g., Northern Europe, South America)."
+					},
+					"capital": {
+						"type": "string",
+						"description": "The capital city of the country."
+					},
+					"languages": {
+						"items": {
+							"type": "string"
+						},
+						"type": "array",
+						"description": "An array of official languages spoken in the country."
+					},
+					"currencies": {
+						"items": {
+							"type": "string"
+						},
+						"type": "array",
+						"description": "An array of currencies used in the country."
+					},
+					"latitude": {
+						"$ref": "#/components/schemas/Latitude",
+						"description": "The latitude of the country."
+					},
+					"longitude": {
+						"$ref": "#/components/schemas/Longitude",
+						"description": "The longitude of the country."
+					},
+					"timezones": {
+						"items": {
+							"$ref": "#/components/schemas/Timezone"
+						},
+						"type": "array",
+						"description": "An array of timezones the country spans."
+					},
+					"borders": {
+						"items": {
+							"$ref": "#/components/schemas/CountryCode"
+						},
+						"type": "array",
+						"description": "An array of countries that share a border with this country, represented by their country codes."
+					},
+					"independent": {
+						"type": "boolean",
+						"description": "Indicates whether the country is recognized as an independent state."
+					}
+				},
+				"required": [
+					"countryCode",
+					"countryName",
+					"area",
+					"population",
+					"region",
+					"subregion",
+					"capital",
+					"languages",
+					"currencies",
+					"latitude",
+					"longitude",
+					"timezones",
+					"borders",
+					"independent"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TeamHeader": {
+				"description": "Represents the essential header information for a FIFA team.",
+				"properties": {
+					"countryCode": {
+						"$ref": "#/components/schemas/CountryCode",
+						"description": "The ISO 3166-1 alpha-3 country code, used for cross-referencing with country data."
+					},
+					"teamName": {
+						"type": "string",
+						"description": "The name of the team, usually the name of the country it represents."
+					},
+					"teamIconSvgUrl": {
+						"$ref": "#/components/schemas/Url",
+						"description": "The URL to the team's icon or flag image in SVG format."
+					}
+				},
+				"required": [
+					"countryCode",
+					"teamName",
+					"teamIconSvgUrl"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TeamDetails": {
+				"description": "Represents the details for a FIFA team.",
+				"properties": {
+					"countryCode": {
+						"$ref": "#/components/schemas/CountryCode",
+						"description": "The ISO 3166-1 alpha-3 country code, used for cross-referencing with country data."
+					},
+					"teamName": {
+						"type": "string",
+						"description": "The name of the team, usually the name of the country it represents."
+					},
+					"teamIconSvgUrl": {
+						"$ref": "#/components/schemas/Url",
+						"description": "The URL to the team's icon or flag image in SVG format."
+					},
+					"groupRank": {
+						"$ref": "#/components/schemas/PositiveNumber",
+						"description": "The rank of the team within its specific group during a tournament.\nA lower number indicates a higher rank within the group."
+					},
+					"totalRank": {
+						"$ref": "#/components/schemas/PositiveNumber",
+						"description": "The overall rank of the team in the entire competition or league.\nThis is the team's position in the overall standings."
+					},
+					"goalsScored": {
+						"$ref": "#/components/schemas/PositiveNumber",
+						"description": "The total number of goals scored by the team in the competition or league.\nThis represents the offensive performance of the team."
+					},
+					"goalsConceded": {
+						"$ref": "#/components/schemas/PositiveNumber",
+						"description": "The total number of goals conceded by the team in the competition or league.\nThis represents the defensive performance of the team."
+					}
+				},
+				"required": [
+					"countryCode",
+					"teamName",
+					"teamIconSvgUrl",
+					"groupRank",
+					"totalRank",
+					"goalsScored",
+					"goalsConceded"
+				],
+				"type": "object",
+				"additionalProperties": false
 			}
 		},
 		"securitySchemes": {}
@@ -209,13 +483,14 @@
 					}
 				},
 				"description": "Retrieves all candidates based on the provided query parameters.",
+				"summary": "Get the list of all FIFA World Cup 2024 candidates.",
 				"tags": [
 					"Candidates"
 				],
 				"security": [],
 				"parameters": [
 					{
-						"description": "- The minimum area to filter candidates by.",
+						"description": "- The minimum area to filter candidates by (positive number) in square kilometers.",
 						"in": "query",
 						"name": "minArea",
 						"required": false,
@@ -225,7 +500,7 @@
 						}
 					},
 					{
-						"description": "- The maximum area to filter candidates by.",
+						"description": "- The maximum area to filter candidates by (positive number) in square kilometers.",
 						"in": "query",
 						"name": "maxArea",
 						"required": false,
@@ -235,7 +510,7 @@
 						}
 					},
 					{
-						"description": "- The minimum population to filter candidates by.",
+						"description": "- The minimum population to filter candidates by (positive number) of population.",
 						"in": "query",
 						"name": "minPopulation",
 						"required": false,
@@ -245,7 +520,7 @@
 						}
 					},
 					{
-						"description": "- The maximum population to filter candidates by.",
+						"description": "- The maximum population to filter candidates by (positive number) of population.",
 						"in": "query",
 						"name": "maxPopulation",
 						"required": false,
@@ -294,7 +569,7 @@
 						}
 					},
 					{
-						"description": "- The order to sort candidates by.",
+						"description": "- The order to sort candidates by (asc/desc).",
 						"in": "query",
 						"name": "sortOrder",
 						"required": false,
@@ -304,6 +579,653 @@
 								"asc",
 								"desc"
 							]
+						}
+					}
+				]
+			}
+		},
+		"/candidates/country": {
+			"get": {
+				"operationId": "GetAllCountries",
+				"responses": {
+					"200": {
+						"description": "An array of `CountryHeader` objects.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/CountryHeader"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"description": "Retrieves all countries on the provided query parameters.",
+				"summary": "Get the list of all FIFA World Cup 2024 countries with essential information.",
+				"tags": [
+					"Countries"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"description": "- The region (continent) to filter countries by.",
+						"in": "query",
+						"name": "region",
+						"required": false,
+						"schema": {
+							"$ref": "#/components/schemas/WorldRegion"
+						}
+					},
+					{
+						"description": "- The subregion (e.g., Caribbean, Melanesia) to filter countries by.",
+						"in": "query",
+						"name": "subregion",
+						"required": false,
+						"schema": {
+							"$ref": "#/components/schemas/WorldSubregion"
+						}
+					},
+					{
+						"description": "- The property to sort countries by.",
+						"in": "query",
+						"name": "sortBy",
+						"required": false,
+						"schema": {
+							"type": "string",
+							"enum": [
+								"countryCode",
+								"countryName",
+								"area",
+								"population",
+								"region",
+								"subregion",
+								"countryFlagSvgUrl"
+							]
+						}
+					},
+					{
+						"description": "- The order to sort countries by (asc/desc).",
+						"in": "query",
+						"name": "sortOrder",
+						"required": false,
+						"schema": {
+							"type": "string",
+							"enum": [
+								"asc",
+								"desc"
+							]
+						}
+					}
+				]
+			}
+		},
+		"/candidates/country/details": {
+			"get": {
+				"operationId": "GetAllCountriesDetails",
+				"responses": {
+					"200": {
+						"description": "An array of `CountryDetails` objects.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/CountryDetails"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"description": "Retrieves all countries details based on the provided query parameters.",
+				"summary": "Get the list of all FIFA World Cup 2024 countries with detailed information.",
+				"tags": [
+					"Countries"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"description": "- The region (continent) to filter countries by.",
+						"in": "query",
+						"name": "region",
+						"required": false,
+						"schema": {
+							"$ref": "#/components/schemas/WorldRegion"
+						}
+					},
+					{
+						"description": "- The subregion (e.g., Caribbean, Melanesia) to filter countries by.",
+						"in": "query",
+						"name": "subregion",
+						"required": false,
+						"schema": {
+							"$ref": "#/components/schemas/WorldSubregion"
+						}
+					},
+					{
+						"description": "- The minimum population to filter countries by (positive number) of population.",
+						"in": "query",
+						"name": "minPopulation",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"description": "- The maximum population to filter countries by (positive number) of population.",
+						"in": "query",
+						"name": "maxPopulation",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"description": "- The minimum area to filter countries by (positive number) in square kilometers.",
+						"in": "query",
+						"name": "minArea",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"description": "- The maximum area to filter countries by (positive number) in square kilometers.",
+						"in": "query",
+						"name": "maxArea",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"description": "- The minimum longitude to filter countries by (positive number) in degrees.",
+						"in": "query",
+						"name": "minLongitude",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"description": "- The maximum longitude to filter countries by (positive number) in degrees.",
+						"in": "query",
+						"name": "maxLongitude",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"description": "- The minimum latitude to filter countries by (positive number) in degrees.",
+						"in": "query",
+						"name": "minLatitude",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"description": "- The maximum latitude to filter countries by (positive number) in degrees.",
+						"in": "query",
+						"name": "maxLatitude",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"description": "- The timezones to filter countries by (example: \"UTC-01:00\", \"UTC\", \"UTC+01:00\", \"UTC+02:00\", etc.).",
+						"in": "query",
+						"name": "timezones",
+						"required": false,
+						"schema": {
+							"type": "array",
+							"items": {
+								"type": "string"
+							}
+						}
+					},
+					{
+						"description": "- The borders (country codes) to filter countries by (example: \"FR\", \"ES\", \"IT\", etc.).",
+						"in": "query",
+						"name": "borders",
+						"required": false,
+						"schema": {
+							"type": "array",
+							"items": {
+								"type": "string"
+							}
+						}
+					},
+					{
+						"description": "- The languages to filter countries by (example: \"French\", \"Italian\", \"English\", etc.).",
+						"in": "query",
+						"name": "languages",
+						"required": false,
+						"schema": {
+							"type": "array",
+							"items": {
+								"type": "string"
+							}
+						}
+					},
+					{
+						"description": "- The currencies to filter countries by (example: \"EUR\", \"USD\", \"GBP\", etc.).",
+						"in": "query",
+						"name": "currencies",
+						"required": false,
+						"schema": {
+							"type": "array",
+							"items": {
+								"type": "string"
+							}
+						}
+					},
+					{
+						"description": "- The property to sort countries by.",
+						"in": "query",
+						"name": "sortBy",
+						"required": false,
+						"schema": {
+							"type": "string",
+							"enum": [
+								"countryCode",
+								"countryName",
+								"area",
+								"population",
+								"region",
+								"subregion",
+								"capital",
+								"languages",
+								"currencies",
+								"latitude",
+								"longitude",
+								"timezones",
+								"borders",
+								"independent"
+							]
+						}
+					},
+					{
+						"description": "- The order to sort countries by (asc/desc).",
+						"in": "query",
+						"name": "sortOrder",
+						"required": false,
+						"schema": {
+							"type": "string",
+							"enum": [
+								"asc",
+								"desc"
+							]
+						}
+					}
+				]
+			}
+		},
+		"/candidates/team": {
+			"get": {
+				"operationId": "GetAllTeams",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/TeamHeader"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Teams"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "sortBy",
+						"required": false,
+						"schema": {
+							"type": "string",
+							"enum": [
+								"countryCode",
+								"teamName",
+								"teamIconSvgUrl"
+							]
+						}
+					},
+					{
+						"in": "query",
+						"name": "sortOrder",
+						"required": false,
+						"schema": {
+							"type": "string",
+							"enum": [
+								"asc",
+								"desc"
+							]
+						}
+					}
+				]
+			}
+		},
+		"/candidates/team/details": {
+			"get": {
+				"operationId": "GetAllTeamDetails",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/TeamDetails"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Teams"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "minGroupRank",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "maxGroupRank",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "minTotalRank",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "maxTotalRank",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "minGoalsScored",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "maxGoalsScored",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "minGoalsConceded",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "maxGoalsConceded",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "sortBy",
+						"required": false,
+						"schema": {
+							"type": "string",
+							"enum": [
+								"countryCode",
+								"teamName",
+								"teamIconSvgUrl",
+								"groupRank",
+								"totalRank",
+								"goalsScored",
+								"goalsConceded"
+							]
+						}
+					},
+					{
+						"in": "query",
+						"name": "sortOrder",
+						"required": false,
+						"schema": {
+							"type": "string",
+							"enum": [
+								"asc",
+								"desc"
+							]
+						}
+					}
+				]
+			}
+		},
+		"/candidates/{countryCode}": {
+			"get": {
+				"operationId": "GetCandidateByCountryCode",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"allOf": [
+										{
+											"$ref": "#/components/schemas/Candidate"
+										}
+									],
+									"nullable": true
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Candidates"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "countryCode",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/candidates/{countryCode}/country": {
+			"get": {
+				"operationId": "GetCountryHeaderByCountryCode",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"allOf": [
+										{
+											"$ref": "#/components/schemas/CountryHeader"
+										}
+									],
+									"nullable": true
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Countries"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "countryCode",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/candidates/{countryCode}/country/details": {
+			"get": {
+				"operationId": "GetCountryDetailsByCountryCode",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"allOf": [
+										{
+											"$ref": "#/components/schemas/CountryDetails"
+										}
+									],
+									"nullable": true
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Countries"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "countryCode",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/candidates/{countryCode}/team": {
+			"get": {
+				"operationId": "GetTeamHeaderByCountryCode",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"allOf": [
+										{
+											"$ref": "#/components/schemas/TeamHeader"
+										}
+									],
+									"nullable": true
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Teams"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "countryCode",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/candidates/{countryCode}/team/details": {
+			"get": {
+				"operationId": "GetTeamDetailsByCountryCode",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"allOf": [
+										{
+											"$ref": "#/components/schemas/TeamDetails"
+										}
+									],
+									"nullable": true
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Teams"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "countryCode",
+						"required": true,
+						"schema": {
+							"type": "string"
 						}
 					}
 				]

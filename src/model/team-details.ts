@@ -9,7 +9,12 @@ export interface TeamDetails {
      * The ISO 3166-1 alpha-3 country code, used for cross-referencing with country data.
      */
     countryCode: CountryCode;
-  
+
+    /**
+     * The FIFA country code, used as a unique identifier.
+     */
+    fifaCode: CountryCode; 
+
     /**
      * The name of the team, usually the name of the country it represents.
      */

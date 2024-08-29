@@ -14,6 +14,11 @@ export interface CountryHeader {
      * The ISO 3166-1 alpha-3 country code.
      */
     countryCode: CountryCode;
+
+    /**
+     * The FIFA country code.
+     */
+    fifaCode: CountryCode;
   
     /**
      * The total area of the country in square kilometers.
